@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "threat-intel-knowledge-graph"
+version = "0.1.0"
+description = "Real-time threat intelligence knowledge graph with GNN prediction"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [{name = "Mayank Mohata"}]
+dependencies = [
+    "torch>=2.0.0",
+    "torch-geometric>=2.4.0",
+    "neo4j>=5.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn[standard]>=0.23.0",
+    "streamlit>=1.28.0",
+    "pyvis>=0.3.2",
+    "plotly>=5.15.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.24.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "stix2>=3.0.0",
+    "taxii2-client>=2.3.0",
+    "networkx>=3.1",
+    "scipy>=1.11.0",
+    "tqdm>=4.65.0",
+    "PyYAML>=6.0",
+    "python-dateutil>=2.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.21.0",
+    "mypy>=1.5.0",
+    "ruff>=0.1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "integration: marks tests requiring external services (Neo4j, LLM APIs)",
+]
+addopts = "-m 'not integration'"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100

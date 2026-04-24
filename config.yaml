@@ -1,0 +1,41 @@
+neo4j:
+  uri: "bolt://localhost:7687"
+  user: "neo4j"
+  password: "password"
+  database: "neo4j"
+
+feeds:
+  otx:
+    enabled: true
+    api_key: "${OTX_API_KEY}"
+    base_url: "https://otx.alienvault.com/api/v1"
+    poll_interval_minutes: 60
+    max_pulses: 100
+  misp:
+    enabled: true
+    url: "${MISP_URL}"
+    api_key: "${MISP_API_KEY}"
+    verify_ssl: false
+    poll_interval_minutes: 30
+  cisa:
+    enabled: true
+    catalog_url: "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+    poll_interval_minutes: 360
+
+gnn:
+  embedding_dim: 128
+  hidden_dim: 256
+  num_layers: 3
+  dropout: 0.3
+  learning_rate: 0.001
+  epochs: 200
+  prediction_top_k: 10
+
+analysis:
+  trend_window_days: 30
+  min_observations: 5
+  emerging_threshold: 2.0
+
+server:
+  host: "0.0.0.0"
+  port: 8000
